@@ -5,6 +5,10 @@ on:
             - main
 jobs:
     deploy:
+        strategy:
+            matrix:
+                node-version: [12, 14, 16]
+                operating-system: [ubuntu-latest, windows-latest]
         runs-on: ubuntu-latest
         steps:
           - name: Get Code
