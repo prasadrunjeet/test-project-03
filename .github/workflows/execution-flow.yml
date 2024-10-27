@@ -31,10 +31,12 @@ jobs:
           path: ~/.npm
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
+        id: run-test
         run: npm ci
       - name: Test code
         run: npm run test
       - name: Upload test report
+        if: steps.run-test.outcome == 'failure'
         uses: actions/upload-artifact@v3
         with:
           name: test-report
